@@ -1,7 +1,6 @@
 package frc.robot.Subsystems.Gyro;
 
-import static edu.wpi.first.units.Units.Degrees;
-import static edu.wpi.first.units.Units.MetersPerSecondPerSecond;
+import static edu.wpi.first.units.Units.*;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Angle;
@@ -15,6 +14,7 @@ public class GyroIOBNO085 implements GyroIO {
 
     private GyroIOInputsAutoLogged inputs;
 
+    /** Creates a new instance of GyroIOBNO085. */
     public GyroIOBNO085() {
         serial = new SerialPort(GyroConstants.baudrate, SerialPort.Port.kOnboard);
 
