@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Drivetrain.Drivetrain;
 import frc.robot.Subsystems.Drivetrain.DrivetrainIOSim;
 import frc.robot.Subsystems.Drivetrain.DrivetrainIOSparkMax;
+import frc.robot.Subsystems.Drivetrain.DrivetrainIOTalonSRX;
 import frc.robot.Subsystems.Drivetrain.Commands.ArcadeDrive;
 import frc.robot.Subsystems.Gyro.Gyro;
 import frc.robot.Subsystems.Gyro.GyroIOPigeon2;
