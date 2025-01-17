@@ -1,10 +1,6 @@
 package frc.robot.Subsystems.Drivetrain;
 
-import static edu.wpi.first.units.Units.Amps;
-import static edu.wpi.first.units.Units.Celsius;
-import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.Percent;
-import static edu.wpi.first.units.Units.Volts;
+import static edu.wpi.first.units.Units.*;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
@@ -21,8 +17,10 @@ import edu.wpi.first.units.measure.Temperature;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants.ControlMode;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.RobotMap;
 import frc.robot.Subsystems.Gyro.GyroIO;
 import frc.robot.Subsystems.Gyro.GyroIOBNO085;
+
 import org.littletonrobotics.junction.Logger;
 
 public class DrivetrainIOSparkMax implements DrivetrainIO {
@@ -44,10 +42,10 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
     private DrivetrainIOInputsAutoLogged inputs;
 
     public DrivetrainIOSparkMax() {
-        flMotor = new SparkMax(DriveConstants.flId, MotorType.kBrushless);
-        frMotor = new SparkMax(DriveConstants.frId, MotorType.kBrushless);
-        blMotor = new SparkMax(DriveConstants.blId, MotorType.kBrushless);
-        brMotor = new SparkMax(DriveConstants.brId, MotorType.kBrushless);
+        flMotor = new SparkMax(RobotMap.DT_FrontLeftId, MotorType.kBrushless);
+        frMotor = new SparkMax(RobotMap.DT_FrontRightId, MotorType.kBrushless);
+        blMotor = new SparkMax(RobotMap.DT_BackLeftId, MotorType.kBrushless);
+        brMotor = new SparkMax(RobotMap.DT_BackRightId, MotorType.kBrushless);
 
         SparkMaxConfig config = new SparkMaxConfig();
         config.idleMode(IdleMode.kBrake);
