@@ -8,9 +8,12 @@ import frc.robot.Subsystems.Drivetrain.Drivetrain;
 import frc.robot.Subsystems.Drivetrain.DrivetrainIOSim;
 import frc.robot.Subsystems.Drivetrain.DrivetrainIOSparkMax;
 import frc.robot.Subsystems.Drivetrain.Commands.ArcadeDrive;
+import frc.robot.Subsystems.Gyro.Gyro;
+import frc.robot.Subsystems.Gyro.GyroIOPigeon2;
 import frc.robot.Subsystems.Roller.Roller;
 import frc.robot.Subsystems.Roller.RollerIOSim;
 import frc.robot.Subsystems.Roller.RollerIOSparkMax;
+import frc.robot.Subsystems.Roller.Commands.RunRoller;
 
 public class RobotContainer {
     // Controller
@@ -21,6 +24,7 @@ public class RobotContainer {
             new Drivetrain(new DrivetrainIOSim());
             new Roller(new RollerIOSim());
         } else {
+            new Gyro(new GyroIOPigeon2());
             new Drivetrain(new DrivetrainIOSparkMax());
             new Roller(new RollerIOSparkMax());
         }
@@ -29,7 +33,8 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
-        
+        controller.a().whileTrue(new RunRoller(1));
+        controller.b().whileTrue(new RunRoller(-1));
     }
 
     public Command getAutonomousCommand() {

@@ -18,9 +18,7 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants.ControlMode;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.RobotMap;
-import frc.robot.Subsystems.Gyro.GyroIO;
-import frc.robot.Subsystems.Gyro.GyroIOBNO085;
-
+import frc.robot.Subsystems.Gyro.Gyro;
 import org.littletonrobotics.junction.Logger;
 
 public class DrivetrainIOSparkMax implements DrivetrainIO {
@@ -34,7 +32,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
     private RelativeEncoder blEncoder;
     private RelativeEncoder brEncoder;
 
-    private GyroIO gyroIO;
+    private Gyro gyro;
 
     private double leftMagnitude;
     private double rightMagnitude;
@@ -68,7 +66,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         blEncoder = blMotor.getEncoder();
         brEncoder = brMotor.getEncoder();
 
-        gyroIO = new GyroIOBNO085();
+        gyro = Gyro.getInstance();
 
         inputs = new DrivetrainIOInputsAutoLogged();
     }
@@ -98,8 +96,6 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         inputs.rightVoltage = getRightVoltage();
 
         inputs.angle = getAngle();
-
-        gyroIO.updateInputs();
 
         Logger.processInputs("Drivetrain_SparkMax", inputs);
     }
@@ -222,7 +218,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
 
     @Override
     public Rotation2d getAngle() {
-        return gyroIO.getHeading();
+        return gyro.getHeading();
     }
 
     @Override
