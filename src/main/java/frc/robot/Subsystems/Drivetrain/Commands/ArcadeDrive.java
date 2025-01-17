@@ -1,9 +1,6 @@
 package frc.robot.Subsystems.Drivetrain.Commands;
 
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.Subsystems.Drivetrain.Drivetrain;
 import java.util.function.Supplier;
 
@@ -12,45 +9,42 @@ public class ArcadeDrive extends Command {
     private Supplier<Double> zRotateSupplier;
     private Drivetrain drivetrain;
 
+    /**
+     * Drives the robot with arcade drive logic.
+     * 
+     * @param xSpeedSupplier The supplier for movement along the x axis.
+     * @param zRotateSupplier The supplier for rotation along the z axis.
+     */
     public ArcadeDrive(Supplier<Double> xSpeedSupplier, Supplier<Double> zRotateSupplier) {
         this.xSpeedSupplier = xSpeedSupplier;
         this.zRotateSupplier = zRotateSupplier;
+        
         drivetrain = Drivetrain.getInstance();
     }
 
+    /** Runs once when the command is initially scheduled. */
     @Override
     public void initialize() {}
 
+    /** Runs once every tick that the command is scheduled. */
     @Override
     public void execute() {
-        double xSpeed = xSpeedSupplier.get();
-        double zRotate = zRotateSupplier.get();
-
-        xSpeed = MathUtil.applyDeadband(xSpeed, 0.1);
-        zRotate = MathUtil.applyDeadband(zRotate, 0.1);
-
-        // Prevents the jump from 0 to 10% at the beginning of movement, but adds it back at 90%.
-        if (xSpeed > 0 && xSpeed < 0.9) xSpeed -= 0.1;
-        if (xSpeed < 0 && xSpeed > -0.9) xSpeed += 0.1;
-        if (zRotate > 0 && zRotate < 0.9) zRotate -= 0.1;
-        if (zRotate < 0 && zRotate > -0.9) zRotate += 0.1;
-
-        xSpeed *= DriveConstants.maxDriveSpeed;
-        zRotate *= DriveConstants.maxTurnSpeed;
-
-        double leftSpeed = xSpeed - zRotate;
-        double rightSpeed = xSpeed + zRotate;
-
-        drivetrain.tankDrive(leftSpeed, rightSpeed);
+        drivetrain.arcadeDrive(xSpeedSupplier.get(), zRotateSupplier.get());
     }
 
+    /**
+     * Runs once every tick that the command is scheduled.
+     * 
+     * @return Whether or not the command should end early.
+     */
     @Override
     public boolean isFinished() {
         return false;
     }
 
+    /** Runs once when the command is cancelled. */
     @Override
     public void end(boolean interrupted) {
-        drivetrain.arcadeDrive(new ChassisSpeeds());
+        drivetrain.arcadeDrive(0, 0);
     }
 }
