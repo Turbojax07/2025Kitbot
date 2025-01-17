@@ -1,9 +1,6 @@
 package frc.robot.Subsystems.Roller;
 
-import static edu.wpi.first.units.Units.Amps;
-import static edu.wpi.first.units.Units.Celsius;
-import static edu.wpi.first.units.Units.RadiansPerSecond;
-import static edu.wpi.first.units.Units.Volts;
+import static edu.wpi.first.units.Units.*;
 
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
@@ -24,6 +21,7 @@ public class RollerIOSim implements RollerIO {
 
     private double voltage;
 
+    /** Creates a new instance of RollerIOSim. */
     public RollerIOSim() {
         var system = LinearSystemId.createFlywheelSystem(DCMotor.getNEO(1), RollerConstants.momentOfInertia, RollerConstants.gearRatio);
         
@@ -42,8 +40,6 @@ public class RollerIOSim implements RollerIO {
         inputs.percent = getPercent();
         inputs.temperature = getTemperature();
         inputs.voltage = getVoltage();
-
-        inputs.mode = getMode();
 
         Logger.processInputs("Roller_Sim", inputs);
     }
