@@ -26,7 +26,7 @@ public class RobotContainer {
             new Roller(new RollerIOSim());
         } else {
             new Gyro(new GyroIOPigeon2());
-            new Drivetrain(new DrivetrainIOSparkMax());
+            new Drivetrain(new DrivetrainIOTalonSRX());
             new Roller(new RollerIOSparkMax());
         }
 
