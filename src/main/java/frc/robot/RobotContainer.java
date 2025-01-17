@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
@@ -41,6 +37,6 @@ public class RobotContainer {
     }
 
     public Command getTeleopCommand() {
-        return new ArcadeDrive(() -> controller.getRawAxis(1), () -> controller.getRawAxis(0));
+        return new ArcadeDrive(controller::getLeftY, controller::getRightX);
     }
 }
