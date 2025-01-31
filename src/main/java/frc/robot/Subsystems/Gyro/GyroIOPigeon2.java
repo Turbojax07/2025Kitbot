@@ -10,13 +10,13 @@ import org.littletonrobotics.junction.Logger;
 public class GyroIOPigeon2 implements GyroIO {
     private Pigeon2 gyro;
 
-    private GyroIOInputsAutoLogged inputs;
+    private GyroIOInputs inputs;
 
     /** Creates a new instance of GyroIOPigeon2. */
     public GyroIOPigeon2() {
         gyro = new Pigeon2(RobotMap.GYRO_Pigeon2Id);
 
-        inputs = new GyroIOInputsAutoLogged();
+        inputs = new GyroIOInputs();
     }
 
     @Override

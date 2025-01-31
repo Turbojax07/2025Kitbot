@@ -8,7 +8,7 @@ public class Gyro extends SubsystemBase {
 
     private static Gyro instance;
 
-    /** 
+    /**
      * Gets a common instance of the {@link Gyro} subsystem.
      * 
      * If the Gyro subsystem has not been initialized, then it begins a simulation of the gyro.
@@ -27,15 +27,14 @@ public class Gyro extends SubsystemBase {
      * @param gyroIO The IO interface to use for this class.  It must implement {@link GyroIO}.
      */
     public Gyro(GyroIO gyroIO) {
-        if (instance != null) {
-            return;
-        } else {
-            instance = this;
-        }
-        
+        if (instance != null) return;
+
+        instance = this;
+
         this.gyroIO = gyroIO;
     }
 
+    /** Runs once every tick that the subsystem is initialized. */
     @Override
     public void periodic() {
         gyroIO.updateInputs();

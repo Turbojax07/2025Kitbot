@@ -6,18 +6,7 @@ import edu.wpi.first.units.measure.LinearAcceleration;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface GyroIO {
-    /** The values to log through AdvantageKit. */
-    @AutoLog
-    public class GyroIOInputs{
-        Angle roll;
-        Angle pitch;
-        Angle yaw;
-        LinearAcceleration x_accel;
-        LinearAcceleration y_accel;
-        LinearAcceleration z_accel;
-    }
-
-    /** Updates the values of the inputs defined in the GyroIO interface. */
+    /** Updates the values of the inputs defined in {@link GyroIOInputs}. */
     public void updateInputs();
 
     /** Gets the heading (yaw) of the robot as a {@link Rotation2d}. */
