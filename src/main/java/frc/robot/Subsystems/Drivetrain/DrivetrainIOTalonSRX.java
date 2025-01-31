@@ -12,7 +12,7 @@ import edu.wpi.first.units.measure.Temperature;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants.ControlMode;
 import frc.robot.Constants.RobotMap;
-import frc.robot.Subsystems.Gyro.Gyro;
+// import frc.robot.Subsystems.Gyro.Gyro;
 import org.littletonrobotics.junction.Logger;
 
 public class DrivetrainIOTalonSRX implements DrivetrainIO {
@@ -21,7 +21,7 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
     private TalonSRX blMotor;
     private TalonSRX brMotor;
 
-    private Gyro gyro;
+    // private Gyro gyro;
 
     private DrivetrainIOInputsAutoLogged inputs;
 
@@ -36,7 +36,7 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
 
         flMotor.setInverted(true);
 
-        gyro = Gyro.getInstance();
+        // gyro = Gyro.getInstance();
 
         inputs = new DrivetrainIOInputsAutoLogged();
     }
@@ -130,7 +130,7 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
 
     @Override
     public Rotation2d getAngle() {
-        return gyro.getHeading();
+        return new Rotation2d();//gyro.getHeading();
     }
 
     @Override
