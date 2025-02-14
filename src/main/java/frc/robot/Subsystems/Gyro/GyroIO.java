@@ -1,11 +1,23 @@
 package frc.robot.Subsystems.Gyro;
 
+import org.littletonrobotics.junction.AutoLog;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.LinearAcceleration;
-import org.littletonrobotics.junction.AutoLog;
 
 public interface GyroIO {
+    @AutoLog
+    public class GyroIOInputs {
+        Angle roll;
+        Angle pitch;
+        Angle yaw;
+        
+        LinearAcceleration x_accel;
+        LinearAcceleration y_accel;
+        LinearAcceleration z_accel;
+    }
+
     /** Updates the values of the inputs defined in {@link GyroIOInputs}. */
     public void updateInputs();
 
