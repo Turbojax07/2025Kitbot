@@ -9,7 +9,6 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Distance;
@@ -18,7 +17,7 @@ import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants.ControlMode;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.RobotMap;
-import frc.robot.Subsystems.Gyro.Gyro;
+// import frc.robot.Subsystems.Gyro.Gyro;
 import org.littletonrobotics.junction.Logger;
 
 public class DrivetrainIOSparkMax implements DrivetrainIO {
@@ -32,7 +31,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
     private RelativeEncoder blEncoder;
     private RelativeEncoder brEncoder;
 
-    private Gyro gyro;
+    // private Gyro gyro;
 
     private double leftMagnitude;
     private double rightMagnitude;
@@ -66,7 +65,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         blEncoder = blMotor.getEncoder();
         brEncoder = brMotor.getEncoder();
 
-        gyro = Gyro.getInstance();
+        // gyro = Gyro.getInstance();
 
         inputs = new DrivetrainIOInputsAutoLogged();
     }
@@ -94,8 +93,6 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         inputs.rightPercent = getRightPercent();
         inputs.rightTemperature = getRightTemperature();
         inputs.rightVoltage = getRightVoltage();
-
-        inputs.angle = getAngle();
 
         Logger.processInputs("Drivetrain_SparkMax", inputs);
     }
@@ -214,11 +211,6 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         }
 
         return null;
-    }
-
-    @Override
-    public Rotation2d getAngle() {
-        return gyro.getHeading();
     }
 
     @Override

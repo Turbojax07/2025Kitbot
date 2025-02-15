@@ -4,7 +4,6 @@ import static edu.wpi.first.units.Units.*;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Distance;
@@ -12,7 +11,6 @@ import edu.wpi.first.units.measure.Temperature;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants.ControlMode;
 import frc.robot.Constants.RobotMap;
-// import frc.robot.Subsystems.Gyro.Gyro;
 import org.littletonrobotics.junction.Logger;
 
 public class DrivetrainIOTalonSRX implements DrivetrainIO {
@@ -20,8 +18,6 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
     private TalonSRX frMotor;
     private TalonSRX blMotor;
     private TalonSRX brMotor;
-
-    // private Gyro gyro;
 
     private DrivetrainIOInputsAutoLogged inputs;
 
@@ -35,8 +31,6 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
         brMotor.follow(frMotor);
 
         flMotor.setInverted(true);
-
-        // gyro = Gyro.getInstance();
 
         inputs = new DrivetrainIOInputsAutoLogged();
     }
@@ -54,8 +48,6 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
         inputs.rightPercent = getRightPercent();
         inputs.rightTemperature = getRightTemperature();
         inputs.rightVoltage = getRightVoltage();
-
-        inputs.angle = getAngle();
 
         Logger.processInputs("Drivetrain_SparkMax", inputs);
     }
@@ -126,11 +118,6 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
     @Override
     public Voltage getRightVoltage() {
         return Volts.of(frMotor.getMotorOutputVoltage());
-    }
-
-    @Override
-    public Rotation2d getAngle() {
-        return new Rotation2d();//gyro.getHeading();
     }
 
     @Override

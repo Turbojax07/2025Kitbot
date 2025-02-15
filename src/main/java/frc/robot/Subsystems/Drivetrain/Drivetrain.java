@@ -9,12 +9,15 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelPositions;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ControlMode;
 import frc.robot.Constants.DriveConstants;
+// import frc.robot.Subsystems.Gyro.Gyro;
 
 public class Drivetrain extends SubsystemBase {
     private DrivetrainIO drivetrainIO;
 
     private DifferentialDriveKinematics kinematics;
     private DifferentialDrivePoseEstimator poseEstimator;
+
+    // private Gyro gyro;
 
     private static Drivetrain instance;
 
@@ -47,13 +50,16 @@ public class Drivetrain extends SubsystemBase {
 
         drivetrainIO = io;
 
+        // gyro = Gyro.getInstance();
+
         kinematics = new DifferentialDriveKinematics(DriveConstants.robotWidth);
         poseEstimator = new DifferentialDrivePoseEstimator(kinematics, new Rotation2d(), 0, 0, new Pose2d());
     }
 
     @Override
     public void periodic() {
-        poseEstimator.update(getAngle(), getPositions());
+        poseEstimator.update(new Rotation2d(), getPositions());
+        // poseEstimator.update(gyro.getHeading(), getPositions());
 
         drivetrainIO.updateInputs();
     }
@@ -90,11 +96,6 @@ public class Drivetrain extends SubsystemBase {
     public void tankDrive(double leftSpeed, double rightSpeed) {
         drivetrainIO.setLeftSpeed(ControlMode.Percent, leftSpeed);
         drivetrainIO.setRightSpeed(ControlMode.Percent, rightSpeed);
-    }
-
-    /** Gets the heading of the robot. */
-    public Rotation2d getAngle() {
-        return drivetrainIO.getAngle();
     }
 
     /** Gets the positions of each wheel on the robot. */

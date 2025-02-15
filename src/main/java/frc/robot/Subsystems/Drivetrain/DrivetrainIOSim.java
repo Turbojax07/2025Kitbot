@@ -2,7 +2,6 @@ package frc.robot.Subsystems.Drivetrain;
 
 import static edu.wpi.first.units.Units.*;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Distance;
@@ -21,16 +20,13 @@ public class DrivetrainIOSim implements DrivetrainIO {
 
     private DrivetrainIOInputsAutoLogged inputs;
 
-    private double leftVoltage;
-    private double rightVoltage;
-
     public DrivetrainIOSim() {
         inputs = new DrivetrainIOInputsAutoLogged();
     }
 
     @Override
     public void updateInputs() {
-        driveSim.setInputs(leftVoltage, rightVoltage);
+        driveSim.setInputs(inputs.leftVoltage.in(Volts), inputs.rightVoltage.in(Volts));
 
         driveSim.update(0.02);
 
@@ -38,15 +34,11 @@ public class DrivetrainIOSim implements DrivetrainIO {
         inputs.leftDistance = getLeftDistance();
         inputs.leftPercent = getLeftPercent();
         inputs.leftTemperature = getLeftTemperature();
-        inputs.leftVoltage = getLeftVoltage();
 
         inputs.rightCurrent = getRightCurrent();
         inputs.rightDistance = getRightDistance();
         inputs.rightPercent = getRightPercent();
         inputs.rightTemperature = getRightTemperature();
-        inputs.rightVoltage = getRightVoltage();
-
-        inputs.angle = getAngle();
 
         Logger.processInputs("Drivetrain_Sim", inputs);
     }
@@ -55,7 +47,7 @@ public class DrivetrainIOSim implements DrivetrainIO {
     public void setLeftSpeed(ControlMode mode, double magnitude) {
         if (mode == ControlMode.Percent) magnitude *= RobotController.getInputVoltage();
 
-        leftVoltage = magnitude;
+        inputs.leftVoltage = Volts.of(magnitude);
 
         inputs.mode = mode;
     }
@@ -64,7 +56,7 @@ public class DrivetrainIOSim implements DrivetrainIO {
     public void setRightSpeed(ControlMode mode, double magnitude) {
         if (mode == ControlMode.Percent) magnitude *= RobotController.getInputVoltage();    
 
-        rightVoltage = magnitude;
+        inputs.rightVoltage = Volts.of(magnitude);
 
         inputs.mode = mode;
     }
@@ -81,14 +73,7 @@ public class DrivetrainIOSim implements DrivetrainIO {
 
     @Override
     public Dimensionless getLeftPercent() {
-        switch(inputs.mode) {
-            case Percent:
-                return Percent.of(leftVoltage);
-            case Voltage:
-                return Volts.of(leftVoltage).div(Volts.of(RobotController.getInputVoltage()));
-        }
-
-        return null;
+        return inputs.leftVoltage.div(Volts.of(RobotController.getInputVoltage()));
     }
 
     @Override
@@ -98,14 +83,7 @@ public class DrivetrainIOSim implements DrivetrainIO {
 
     @Override
     public Voltage getLeftVoltage() {
-        switch(inputs.mode) {
-            case Percent:
-                return Volts.of(RobotController.getInputVoltage()).times(Percent.of(leftVoltage));
-            case Voltage:
-                return Volts.of(leftVoltage);
-        }
-
-        return null;
+        return inputs.leftVoltage;
     }
 
     @Override
@@ -120,14 +98,7 @@ public class DrivetrainIOSim implements DrivetrainIO {
 
     @Override
     public Dimensionless getRightPercent() {
-        switch(inputs.mode) {
-            case Percent:
-                return Percent.of(rightVoltage);
-            case Voltage:
-                return Volts.of(rightVoltage).div(Volts.of(RobotController.getInputVoltage()));
-        }
-
-        return null;
+        return inputs.rightVoltage.div(Volts.of(RobotController.getInputVoltage()));
     }
 
     @Override
@@ -137,21 +108,9 @@ public class DrivetrainIOSim implements DrivetrainIO {
 
     @Override
     public Voltage getRightVoltage() {
-        switch(inputs.mode) {
-            case Percent:
-                return Volts.of(RobotController.getInputVoltage()).times(Percent.of(rightVoltage));
-            case Voltage:
-                return Volts.of(rightVoltage);
-        }
-
-        return null;
+        return inputs.rightVoltage;
     }
     
-    @Override
-    public Rotation2d getAngle() {
-        return driveSim.getHeading();
-    }
-
     @Override
     public ControlMode getMode() {
         return inputs.mode;
