@@ -4,20 +4,14 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Subsystems.Drivetrain.Drivetrain;
-import frc.robot.Subsystems.Drivetrain.DrivetrainIOSim;
-import frc.robot.Subsystems.Drivetrain.DrivetrainIOSparkMax;
-import frc.robot.Subsystems.Drivetrain.DrivetrainIOTalonSRX;
-import frc.robot.Subsystems.Drivetrain.Commands.ArcadeDrive;
-import frc.robot.Subsystems.Gyro.Gyro;
-import frc.robot.Subsystems.Gyro.GyroIOPigeon2;
-import frc.robot.Subsystems.Roller.Roller;
-import frc.robot.Subsystems.Roller.RollerIOSim;
-import frc.robot.Subsystems.Roller.RollerIOSparkMax;
-import frc.robot.Subsystems.Roller.Commands.RunRoller;
+import frc.robot.Subsystems.Drivetrain.*;
+import frc.robot.Subsystems.Drivetrain.Commands.*;
+import frc.robot.Subsystems.Gyro.*;
+import frc.robot.Subsystems.Roller.*;
+import frc.robot.Subsystems.Roller.Commands.*;
 
 public class RobotContainer {
-    // Controller
+    // Controller(s)
     private CommandXboxController controller = new CommandXboxController(0);
 
     public RobotContainer() {

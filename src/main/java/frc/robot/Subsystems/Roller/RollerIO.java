@@ -32,10 +32,13 @@ public interface RollerIO  {
     
     /** Gets the output current of the roller motor as a {@link Current}. */
     public Current getCurrent();
+
     /** Gets the percent output of the roller motor as a {@link Dimensionless}. */
     public Dimensionless getPercent();
+
     /** Gets the temperature of the roller motor as a {@link Temperature}. */
     public Temperature getTemperature();
+    
     /** Gets the output voltage of the roller motor as a {@link Voltage}. */
     public Voltage getVoltage();
 

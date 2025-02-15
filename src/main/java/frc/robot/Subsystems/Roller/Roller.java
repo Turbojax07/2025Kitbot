@@ -29,9 +29,9 @@ public class Roller extends SubsystemBase {
     public Roller(RollerIO rollerIO) {
         if (instance != null) {
             return;
-        } else {
-            instance = this;
         }
+        
+        instance = this;
 
         this.rollerIO = rollerIO;
     }

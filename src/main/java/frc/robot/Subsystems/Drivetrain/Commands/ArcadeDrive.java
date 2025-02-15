@@ -5,9 +5,9 @@ import frc.robot.Subsystems.Drivetrain.Drivetrain;
 import java.util.function.Supplier;
 
 public class ArcadeDrive extends Command {
+    private Drivetrain drivetrain;
     private Supplier<Double> xSpeedSupplier;
     private Supplier<Double> zRotateSupplier;
-    private Drivetrain drivetrain;
 
     /**
      * Drives the robot with arcade drive logic.

@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Roller.Roller;
 
 public class RunRoller extends Command {
-    private double velocity;
     private Roller roller;
+    private double velocity;
 
     /**
      * Drives the roller motor at a set velocity.
