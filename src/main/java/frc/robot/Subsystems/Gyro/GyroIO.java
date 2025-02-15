@@ -1,5 +1,7 @@
 package frc.robot.Subsystems.Gyro;
 
+import static edu.wpi.first.units.Units.*;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.LinearAcceleration;
@@ -8,13 +10,13 @@ import org.littletonrobotics.junction.AutoLog;
 public interface GyroIO {
     @AutoLog
     public class GyroIOInputs {
-        Angle roll;
-        Angle pitch;
-        Angle yaw;
+        Angle roll = Rotations.zero();
+        Angle pitch = Rotations.zero();
+        Angle yaw = Rotations.zero();
         
-        LinearAcceleration x_accel;
-        LinearAcceleration y_accel;
-        LinearAcceleration z_accel;
+        LinearAcceleration x_accel = MetersPerSecondPerSecond.zero();
+        LinearAcceleration y_accel = MetersPerSecondPerSecond.zero();
+        LinearAcceleration z_accel = MetersPerSecondPerSecond.zero();
     }
 
     /** Updates the values of the inputs defined in {@link GyroIOInputs}. */

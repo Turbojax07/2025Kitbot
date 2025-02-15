@@ -1,5 +1,7 @@
 package frc.robot.Subsystems.Roller;
 
+import static edu.wpi.first.units.Units.*;
+
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Temperature;
@@ -11,12 +13,12 @@ public interface RollerIO  {
     /** The values to log through AdvantageKit. */
     @AutoLog
     public class RollerIOInputs {
-        Current current;
-        Dimensionless percent;
-        Temperature temperature;
-        Voltage voltage;
+        Current current = Amps.zero();
+        Dimensionless percent = Percent.zero();
+        Temperature temperature = Celsius.zero();
+        Voltage voltage = Volts.zero();
 
-        ControlMode mode;
+        ControlMode mode = ControlMode.Percent;
     }
 
     /** Updates the values of the inputs defined in the RollerIO interface. */

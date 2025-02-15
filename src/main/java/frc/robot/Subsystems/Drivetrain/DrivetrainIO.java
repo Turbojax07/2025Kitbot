@@ -1,5 +1,7 @@
 package frc.robot.Subsystems.Drivetrain;
 
+import static edu.wpi.first.units.Units.*;
+
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Distance;
@@ -11,17 +13,17 @@ import org.littletonrobotics.junction.AutoLog;
 public interface DrivetrainIO {
     @AutoLog
     public class DrivetrainIOInputs {
-        Current leftCurrent;
-        Distance leftDistance;
-        Dimensionless leftPercent;
-        Temperature leftTemperature;
-        Voltage leftVoltage;
+        Current leftCurrent = Amps.zero();
+        Distance leftDistance = Inches.zero();
+        Dimensionless leftPercent = Percent.zero();
+        Temperature leftTemperature = Celsius.zero();
+        Voltage leftVoltage = Volts.zero();
 
-        Current rightCurrent;
-        Distance rightDistance;
-        Dimensionless rightPercent;
-        Temperature rightTemperature;
-        Voltage rightVoltage;
+        Current rightCurrent = Amps.zero();
+        Distance rightDistance = Inches.zero();
+        Dimensionless rightPercent = Percent.zero();
+        Temperature rightTemperature = Celsius.zero();
+        Voltage rightVoltage = Volts.zero();
 
         ControlMode mode = ControlMode.Percent;
     }
