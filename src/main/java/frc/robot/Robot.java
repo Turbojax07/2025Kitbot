@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
@@ -18,6 +19,14 @@ public class Robot extends LoggedRobot {
         autonomousCommand = robotContainer.getAutonomousCommand();
         teleopCommand = robotContainer.getTeleopCommand();
 
+        if (autonomousCommand == null) {
+            autonomousCommand = Commands.print("No Autonomous command configured.");
+        }
+
+        if (teleopCommand == null) {
+            teleopCommand = Commands.print("No Teleop command configured.");
+        }
+
         Logger.addDataReceiver(new NT4Publisher());
 
         if (isReal()) {
@@ -31,62 +40,67 @@ public class Robot extends LoggedRobot {
         Logger.start();
     }
 
+    /** Runs every tick that the robot is on. */
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
     }
 
+    /** Runs once when the robot enters Disabled mode. */
     @Override
     public void disabledInit() {}
 
+    /** Runs every tick that the robot is in Disabled mode. */
     @Override
     public void disabledPeriodic() {}
 
+    /** Runs once when the robot exits Disabled mode. */
     @Override
     public void disabledExit() {}
 
+    /** Runs once when the robot enters Autonomous mode. */
     @Override
     public void autonomousInit() {
-        if (autonomousCommand != null) {
-            autonomousCommand.schedule();
-        }
+        autonomousCommand.schedule();
     }
 
+    /** Runs every tick that the robot is in Autonomous mode. */
     @Override
     public void autonomousPeriodic() {}
 
+    /** Runs once when the robot exits Autonomous mode. */
     @Override
     public void autonomousExit() {
-        if (autonomousCommand != null) {
-            autonomousCommand.cancel();
-        }
+        autonomousCommand.cancel();
     }
 
+    /** Runs once when the robot enters Teleop mode. */
     @Override
     public void teleopInit() {
-        if (teleopCommand != null) {
-            teleopCommand.schedule();
-        }
+        teleopCommand.schedule();
     }
 
+    /** Runs every tick that the robot is in Teleop mode. */
     @Override
     public void teleopPeriodic() {}
 
+    /** Runs once when the robot exits Teleop mode. */
     @Override
     public void teleopExit() {
-        if (teleopCommand != null) {
-            teleopCommand.cancel();
-        }
+        teleopCommand.cancel();
     }
 
+    /** Runs once when the robot enters Test mode. */
     @Override
     public void testInit() {
         CommandScheduler.getInstance().cancelAll();
     }
 
+    /** Runs every tick that the robot is in Test mode. */
     @Override
     public void testPeriodic() {}
 
+    /** Runs once when the robot exits Test mode. */
     @Override
     public void testExit() {}
 }
