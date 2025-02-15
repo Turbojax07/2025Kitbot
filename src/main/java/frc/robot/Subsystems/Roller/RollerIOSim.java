@@ -19,8 +19,6 @@ public class RollerIOSim implements RollerIO {
 
     private RollerIOInputsAutoLogged inputs;
 
-    private double voltage;
-
     /** Creates a new instance of RollerIOSim. */
     public RollerIOSim() {
         var system = LinearSystemId.createFlywheelSystem(DCMotor.getNEO(1), RollerConstants.momentOfInertia, RollerConstants.gearRatio);
@@ -32,14 +30,13 @@ public class RollerIOSim implements RollerIO {
 
     @Override
     public void updateInputs() {
-        roller.setInputVoltage(voltage);
+        roller.setInputVoltage(inputs.voltage.in(Volts));
 
         roller.update(0.02);
 
         inputs.current = getCurrent();
         inputs.percent = getPercent();
         inputs.temperature = getTemperature();
-        inputs.voltage = getVoltage();
 
         Logger.processInputs("Roller_Sim", inputs);
     }
@@ -48,7 +45,7 @@ public class RollerIOSim implements RollerIO {
     public void setSpeed(ControlMode mode, double magnitude) {
         if (mode == ControlMode.Percent) magnitude *= RobotController.getInputVoltage();
 
-        voltage = magnitude;
+        inputs.voltage = Volts.of(magnitude);
 
         inputs.mode = mode;
     }
@@ -60,7 +57,7 @@ public class RollerIOSim implements RollerIO {
 
     @Override
     public Dimensionless getPercent() {
-        return roller.getAngularVelocity().div(RadiansPerSecond.of(DCMotor.getNEO(1).freeSpeedRadPerSec));
+        return Percent.of(roller.getInputVoltage() * 100.0 / RobotController.getInputVoltage());
     }
 
     @Override
