@@ -37,6 +37,6 @@ public class RobotContainer {
     }
 
     public Command getTeleopCommand() {
-        return new ArcadeDrive(controller::getLeftY, controller::getRightX);
+        return new ArcadeDrive(() -> -controller.getLeftY(), () -> -controller.getRightX());
     }
 }
