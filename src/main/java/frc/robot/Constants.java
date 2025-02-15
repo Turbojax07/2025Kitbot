@@ -33,12 +33,6 @@ public class Constants {
         public static final double rotToMeters = gearRatio * Math.PI * wheelDiameter.in(Meters);
     }
 
-    public class GyroConstants {
-        public static final double MILLI_G_TO_MS2 = 0.0098067; // < Scalar to convert milli-gs to m/s^2
-        public static final double DEGREE_SCALE = 0.01;        // < To convert the degree values
-        public static final int baudrate = 115200;             // < Baud rate of the serial connection
-    }
-
     public class RollerConstants {
         public static final double gearRatio = 5.4167;
         public static final double momentOfInertia = 0.000224;
