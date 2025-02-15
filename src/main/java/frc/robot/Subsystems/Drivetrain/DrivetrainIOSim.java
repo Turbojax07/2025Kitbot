@@ -2,6 +2,7 @@ package frc.robot.Subsystems.Drivetrain;
 
 import static edu.wpi.first.units.Units.*;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Dimensionless;
 import edu.wpi.first.units.measure.Distance;
@@ -114,5 +115,9 @@ public class DrivetrainIOSim implements DrivetrainIO {
     @Override
     public ControlMode getMode() {
         return inputs.mode;
+    }
+
+    public Rotation2d getHeading() {
+        return driveSim.getHeading();
     }
 }

@@ -6,10 +6,12 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelPositions;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ControlMode;
 import frc.robot.Constants.DriveConstants;
 // import frc.robot.Subsystems.Gyro.Gyro;
+import org.littletonrobotics.junction.Logger;
 
 public class Drivetrain extends SubsystemBase {
     private DrivetrainIO drivetrainIO;
@@ -58,8 +60,14 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-        poseEstimator.update(new Rotation2d(), getPositions());
+        if (RobotBase.isReal()) {
+            poseEstimator.update(new Rotation2d(), getPositions());
+        } else if (drivetrainIO instanceof DrivetrainIOSim) {
+            poseEstimator.update(((DrivetrainIOSim) drivetrainIO).getHeading(), getPositions());
+        }
         // poseEstimator.update(gyro.getHeading(), getPositions());
+
+        Logger.recordOutput("Pose", poseEstimator.getEstimatedPosition());
 
         drivetrainIO.updateInputs();
     }
